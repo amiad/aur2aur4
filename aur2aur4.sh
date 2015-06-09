@@ -33,7 +33,7 @@ while getopts ":l:u:" o; do
 	esac
 done
 
-mkdir aur4
+mkdir -p aur4
 cd aur4
 
 for package in $list; do
