@@ -3,6 +3,8 @@
 function help_script(){
 	echo 'argument is missed'
 	echo 'Usage:'
+	echo './aur2aur4.sh -a'
+	echo 'or'
 	echo './aur2aur4.sh -l "pack1 pack2 pack3"'
 	echo 'or'
 	echo './aur2aur4.sh -u username'
