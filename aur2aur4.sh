@@ -13,7 +13,7 @@ if [[ -z $1 ]]; then
 	help_script
 fi
 
-while getopts ":l:u:" o; do
+while getopts ":l:u:a:" o; do
 	case "${o}" in
 		l)
 			list=$OPTARG
@@ -21,11 +21,14 @@ while getopts ":l:u:" o; do
 		u)
 			results=$(curl -s "https://aur.archlinux.org/rpc.php?type=msearch&arg=$OPTARG")
 			list=$(echo $results | grep -Po '"Name":.*?[^\\],' | cut -d'"' -f4)
-			
+
 			if [[ ! $list ]]; then
 				echo 'This user has no packages';
 				exit;
 			fi
+			;;
+		a)
+			list=$(ssh aur@aur4.archlinux.org list-repos | grep '^*' | sed -e 's/^*//')
 			;;
 		\?)
 			help_script
@@ -38,18 +41,18 @@ cd aur4
 
 for package in $list; do
 	git clone ssh://aur@aur4.archlinux.org/$package.git
-	
+
 	prefix=$(echo $package | cut -c1-2)
 	wget "https://aur.archlinux.org/packages/$prefix/$package/$package.tar.gz"
 	tar xzf $package.tar.gz
 	rm -rf $package.tar.gz
-	
+
 	cd $package
 	mksrcinfo
 	git add .
 	git commit -m "Initial import"
 	git push origin master
-	
+
 	cd ..
 done
 
