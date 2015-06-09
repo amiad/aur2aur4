@@ -11,3 +11,10 @@ OR
 OR
 
 `./aur2aur4.sh -u username` - import by AUR username.
+
+##Dependencies
+
+* git
+* pkgbuild-introspection
+* curl
+* wget
