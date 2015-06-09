@@ -6,8 +6,8 @@ Import packages from aur3 to aur4 by packages list or aur user
 
 OR
 
-`./aur2aur4.sh -l "pack1 pack2 pack3"`
+`./aur2aur4.sh -l "pack1 pack2 pack3"` - import by packages list.
 
 OR
 
-`./aur2aur4.sh -u username`
+`./aur2aur4.sh -u username` - import by AUR username.
