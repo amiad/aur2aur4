@@ -16,7 +16,7 @@ fi
 while getopts ":l:u:" o; do
 	case "${o}" in
 		l)
-			list=$@
+			list=$OPTARG
 			;;
 		u)
 			results=$(curl "https://aur.archlinux.org/rpc.php?type=msearch&arg=$OPTARG")
