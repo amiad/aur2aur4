@@ -11,9 +11,18 @@ function help_script(){
 	exit
 }
 
+DEPS='git mksrcinfo wget curl'
+
 if [[ -z $1 ]]; then
 	help_script
 fi
+
+for command in $DEPS; do
+	if [ ! $(command -v $command) ]; then
+		echo "$command is missed! please install its."
+		exit
+	fi
+done
 
 while getopts ":l:u:a:" o; do
 	case "${o}" in
