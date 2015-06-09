@@ -19,7 +19,7 @@ while getopts ":l:u:" o; do
 			list=$OPTARG
 			;;
 		u)
-			results=$(curl "https://aur.archlinux.org/rpc.php?type=msearch&arg=$OPTARG")
+			results=$(curl -s "https://aur.archlinux.org/rpc.php?type=msearch&arg=$OPTARG")
 			list=$(echo $results | grep -Po '"Name":.*?[^\\],' | cut -d'"' -f4)
 			
 			if [[ ! $list ]]; then
