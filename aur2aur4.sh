@@ -48,8 +48,8 @@ while getopts ":l:u:a:" o; do
 done
 
 mkdir -p aur4
-cd aur4
 
+pushd aur4
 for package in $list; do
 	git clone ssh://aur@aur4.archlinux.org/$package.git
 
@@ -58,14 +58,13 @@ for package in $list; do
 	tar xzf $package.tar.gz
 	rm -rf $package.tar.gz
 
-	cd $package
+	pushd $package
 	mksrcinfo
 	git add .
 	git commit -m "Initial import"
 	git push origin master
-
-	cd ..
+    popd
 done
+popd
 
-cd ..
 echo "Import finished"
