@@ -5,9 +5,11 @@ function help_script(){
 	echo 'Usage:'
 	echo './aur2aur4.sh -a'
 	echo 'or'
-	echo './aur2aur4.sh -l "pack1 pack2 pack3"'
+	echo './aur2aur4.sh -l "pack1 pack2 pack3" [ -f ]'
 	echo 'or'
-	echo './aur2aur4.sh -u username'
+	echo './aur2aur4.sh -u username [ -f ]'
+	echo ''
+	echo '-f   force override aur4 exists package'
 	exit
 }
 
@@ -24,7 +26,7 @@ for command in $DEPS; do
 	fi
 done
 
-while getopts ":l:u:a:" o; do
+while getopts ":l:u:af" o; do
 	case "${o}" in
 		l)
 			list=$OPTARG
@@ -41,6 +43,9 @@ while getopts ":l:u:a:" o; do
 		a)
 			list=$(ssh aur@aur4.archlinux.org list-repos | grep '^*' | sed -e 's/^*//')
 			;;
+		f)
+			force=1
+			;;
 		\?)
 			help_script
 			;;
@@ -53,6 +58,11 @@ pushd aur4
 for package in $list; do
 	git clone ssh://aur@aur4.archlinux.org/$package.git
 
+	if [[ $(find $package/.git/objects -type f | wc -l) != 0 ]] && [[ $force != 1 ]]; then
+		rm -rf $package
+		continue
+	fi
+
 	prefix=$(echo $package | cut -c1-2)
 	wget -q --show-progress "https://aur.archlinux.org/packages/$prefix/$package/$package.tar.gz"
 	tar xzf $package.tar.gz
@@ -64,6 +74,7 @@ for package in $list; do
 	git commit -m "Initial import"
 	git push origin master
 	popd
+
 done
 popd
 
