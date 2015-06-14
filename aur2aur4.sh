@@ -63,7 +63,7 @@ for package in $list; do
 	git add .
 	git commit -m "Initial import"
 	git push origin master
-    popd
+	popd
 done
 popd
 
