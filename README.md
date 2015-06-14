@@ -16,5 +16,4 @@ OR
 
 * git
 * pkgbuild-introspection
-* curl
 * wget
