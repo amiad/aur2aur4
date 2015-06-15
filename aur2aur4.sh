@@ -1,7 +1,6 @@
 #!/bin/bash
 
 function help_script(){
-	echo 'Argument missing'
 	echo 'Usage:'
 	echo "$0 -a"
 	echo "$0 -l \"pack1 pack2 pack3\" [-f]"
@@ -14,6 +13,8 @@ function help_script(){
 DEPS='git mksrcinfo wget'
 
 if [[ -z $1 ]]; then
+	echo 'Argument missing'
+	echo ''
 	help_script
 fi
 
