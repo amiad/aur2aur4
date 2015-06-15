@@ -33,7 +33,7 @@ while getopts ":l:u:af" o; do
 			;;
 		u)
 			results=$(wget -q -O- "https://aur.archlinux.org/rpc.php?type=msearch&arg=$OPTARG")
-			list=$(echo $results | grep -Po '"Name":.*?[^\\],' | cut -d'"' -f4)
+			list=$(echo $results | grep -Po '"PackageBase":.*?[^\\],' | cut -d'"' -f4 | sort | uniq)
 
 			if [[ ! $list ]]; then
 				echo 'This user has no packages';
@@ -72,7 +72,7 @@ for package in $list; do
 	mksrcinfo
 	git add .
 	git commit -m "Initial import"
-	git push origin master
+	#git push origin master
 	popd
 
 done
