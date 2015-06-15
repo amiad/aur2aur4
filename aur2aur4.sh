@@ -3,11 +3,9 @@
 function help_script(){
 	echo 'Argument missing'
 	echo 'Usage:'
-	echo './aur2aur4.sh -a'
-	echo 'or'
-	echo './aur2aur4.sh -l "pack1 pack2 pack3" [ -f ]'
-	echo 'or'
-	echo './aur2aur4.sh -u username [ -f ]'
+	echo "$0 -a"
+	echo "$0 -l \"pack1 pack2 pack3\" [-f]"
+	echo "$0 -u username [-f]"
 	echo ''
 	echo '-f   force override aur4 exists package'
 	exit
