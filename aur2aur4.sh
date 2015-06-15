@@ -24,7 +24,7 @@ for command in $DEPS; do
 	fi
 done
 
-while getopts ":l:u:af" o; do
+while getopts "l:u:af" o; do
 	case "${o}" in
 		l)
 			list=$OPTARG
