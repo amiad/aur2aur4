@@ -72,7 +72,7 @@ for package in $list; do
 	mksrcinfo
 	git add .
 	git commit -m "Initial import"
-	#git push origin master
+	git push origin master
 	popd
 
 done
