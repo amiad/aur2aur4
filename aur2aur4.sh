@@ -10,7 +10,8 @@ function help_script(){
 	exit
 }
 
-DEPS='git mksrcinfo wget'
+DEPS=('git' 'mksrcinfo' 'wget')
+DEPS_PKGS=('git' 'pkgbuild-introspection' 'wget')
 
 if [[ -z $1 ]]; then
 	echo 'Argument missing'
@@ -18,9 +19,9 @@ if [[ -z $1 ]]; then
 	help_script
 fi
 
-for command in $DEPS; do
-	if [ ! $(command -v $command) ]; then
-		echo "$command is missing. Please install it."
+for ((i=1;$i<${#DEPS};i++)); do
+	if [ ! $(command -v ${DEPS[i]}) ]; then
+		echo "${DEPS_PKGS[i]} is missing. Please install it."
 		exit
 	fi
 done
