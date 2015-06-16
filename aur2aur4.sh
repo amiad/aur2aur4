@@ -54,7 +54,7 @@ done
 
 mkdir -p aur4
 
-pushd aur4
+pushd aur4 > /dev/null
 for package in $list; do
 	git clone ssh://aur@aur4.archlinux.org/$package.git
 
@@ -68,14 +68,14 @@ for package in $list; do
 	tar xzf $package.tar.gz
 	rm -rf $package.tar.gz
 
-	pushd $package
+	pushd $package > /dev/null
 	mksrcinfo
 	git add .
 	git commit -m "Initial import"
 	git push origin master
-	popd
+	popd > /dev/null
 
 done
-popd
+popd > /dev/null
 
 echo "Import finished"
