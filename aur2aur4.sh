@@ -71,6 +71,7 @@ for package in $list; do
 	pushd $package > /dev/null
 	mksrcinfo
 	git add .
+	git add .SRCINFO -f
 	git commit -m "Initial import"
 	git push origin master
 	popd > /dev/null
