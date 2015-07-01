@@ -7,6 +7,7 @@ function help_script(){
 	echo "$0 -u username [-f]"
 	echo ''
 	echo '-f   force override aur4 exists package'
+	echo "$0 -o <outdir>"
 	exit
 }
 
@@ -26,7 +27,7 @@ for ((i=1;$i<${#DEPS};i++)); do
 	fi
 done
 
-while getopts "l:u:af" o; do
+while getopts "l:u:o:af" o; do
 	case "${o}" in
 		l)
 			list=$OPTARG
@@ -40,6 +41,15 @@ while getopts "l:u:af" o; do
 				exit;
 			fi
 			;;
+		o)
+			new_outdir=$OPTARG
+			if [[ ! $new_outdir ]]; then
+				outdir=pwd;
+			else
+				outdir="$new_outdir";
+			fi
+			;;
+
 		a)
 			list=$(ssh aur@aur4.archlinux.org list-repos | grep '^*' | sed -e 's/^*//')
 			;;
@@ -52,9 +62,9 @@ while getopts "l:u:af" o; do
 	esac
 done
 
-mkdir -p aur4
+mkdir -p "$outdir"/aur4
 
-pushd aur4 > /dev/null
+pushd "$outdir"/aur4 > /dev/null
 for package in $list; do
 	git clone ssh://aur@aur4.archlinux.org/$package.git
 
