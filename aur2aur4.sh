@@ -7,7 +7,7 @@ function help_script(){
 	echo "$0 -u username [-f] [-o <outdir>]"
 	echo ''
 	echo '-f            force override aur4 exists package'
-	echo "-o <outdir>   download packages into outdir "
+	echo "-o <outdir>   download packages into outdir"
 	exit
 }
 
