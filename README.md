@@ -13,6 +13,7 @@ OR
 `./aur2aur4.sh -u username [-f] [-o <outdir>]` - import by AUR username.
 
 `-f` - force override aur4 exists package
+
 `-o <outdir>` - download packages into outdir
 
 ##Dependencies
