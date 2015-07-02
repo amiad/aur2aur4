@@ -2,12 +2,12 @@
 
 function help_script(){
 	echo 'Usage:'
-	echo "$0 -a"
-	echo "$0 -l \"pack1 pack2 pack3\" [-f]"
-	echo "$0 -u username [-f]"
+	echo "$0 -a [-o <outdir>]"
+	echo "$0 -l \"pack1 pack2 pack3\" [-f] [-o <outdir>]"
+	echo "$0 -u username [-f] [-o <outdir>]"
 	echo ''
-	echo '-f   force override aur4 exists package'
-	echo "$0 -o <outdir>"
+	echo '-f            force override aur4 exists package'
+	echo "-o <outdir>   download packages into outdir "
 	exit
 }
 
@@ -42,11 +42,10 @@ while getopts "l:u:o:af" o; do
 			fi
 			;;
 		o)
-			new_outdir=$OPTARG
-			if [[ ! $new_outdir ]]; then
-				outdir=pwd;
-			else
-				outdir="$new_outdir";
+			outdir=$OPTARG;
+			if [[ ! -d $outdir ]]; then
+				echo 'Directory not exists'
+				exit
 			fi
 			;;
 
@@ -61,6 +60,10 @@ while getopts "l:u:o:af" o; do
 			;;
 	esac
 done
+
+if [[ ! $outdir ]]; then
+	outdir=$(pwd)
+fi
 
 mkdir -p "$outdir"/aur4
 
