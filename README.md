@@ -1,7 +1,7 @@
 # aur2aur4
 Import packages from aur3 to aur4 by packages list or aur user
 
-##Usage
+## Usage
 `./aur2aur4.sh -a [-o <outdir>]` - get list of empty reps from aur4 and import them automatically.
 
 OR
@@ -16,7 +16,7 @@ OR
 
 `-o <outdir>` - download packages into outdir
 
-##Dependencies
+## Dependencies
 
 * git
 * pkgbuild-introspection
